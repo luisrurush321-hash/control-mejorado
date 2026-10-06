@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Consulta de Clientes - Bucle While</title>
+    <link rel="stylesheet" href="style4.css">
+</head>
+<body>
+    <h2>Consulta de Cartera de Clientes</h2>
+    <form onsubmit="return false;">
+        <label for="clienteBuscarInput">Nombre del Cliente a buscar:</label><br>
+        <input type="text" id="clienteBuscarInput" placeholder="Ej. Carlos Ruiz"><br><br>
+
+        <button type="button" onclick="buscarCliente()">Buscar en Base de Datos</button>
+    </form>
+
+    <p id="resultadoBusqueda"></p>
+
+    <script>
+        // Lista base de clientes registrados en el sistema comercial mediante un array
+        const baseDatosClientes = ["Empresa Alfa", "Juan Perez", "Maria Gomez", "Carlos Ruiz", "Comercial Beta"];
+
+        function buscarCliente()
+        {
+            let clienteBuscado = document.getElementById("clienteBuscarInput").value.trim();
+            let encontrado = false;
+            let i = 0;
+
+            if (clienteBuscado === "")
+            {
+                alert("Escriba un nombre para consultar.");
+                document.getElementById("clienteBuscarInput").focus();
+                return;
+            }
+
+            // Bucle While: Busca el cliente en el arreglo posición por posición hasta encontrarlo o terminar la lista
+            while (i < baseDatosClientes.length && !encontrado) // mientras no haya llegado al final Y no haya sido encontrado
+            {
+                if (baseDatosClientes[i].toLowerCase() === clienteBuscado.toLowerCase()) //conversión a minúsculas anbos textos
+                {
+                    encontrado = true; // Se activa la bandera para salir del bucle
+                }
+                i++;
+            }
+
+            // Mostramos la respuesta según el resultado del bucle
+            if (encontrado)
+            {
+                document.getElementById("resultadoBusqueda").className="exito";
+                document.getElementById("resultadoBusqueda").innerHTML= "Estado: El cliente '" + clienteBuscado + "' SÍ está registrado en el sistema.";
+            }else
+            {
+                document.getElementById("resultadoBusqueda").className="error";
+                document.getElementById("resultadoBusqueda").innerText = "Estado: El cliente '" + clienteBuscado + "' NO se encuentra en la base de datos.";
+                document.getElementById("clienteBuscarInput").focus();
+            }
+        }
+    </script>
+</body>
+</html>

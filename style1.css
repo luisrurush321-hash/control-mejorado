@@ -1,0 +1,38 @@
+body {
+    font-family: sans-serif;
+    background-color: #e8f5e9;
+    color: #1b4332;
+    text-align: center;
+    padding-top: 50px;
+}
+form {
+    background-color: #ffffff;
+    display: inline-block;
+    padding: 25px;
+    border: 2px solid #2e7d32;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(46, 125, 50, 0.15);
+}
+input {
+    padding: 9px;
+    margin: 10px 0;
+    width: 200px;
+    border: 1px solid #66bb6a;
+    border-radius: 5px;
+}
+button {
+    padding: 9px 15px;
+    cursor: pointer;
+    margin: 5 px;
+    border: 0;
+    border-radius: 5px;
+    background-color: #2e7d32;
+    color: white;
+}
+button:hover {
+    background-color: #1b5e20;
+}
+#mensajeLogin {
+    font-weight: bold;
+    color: #c62828;
+}

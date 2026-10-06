@@ -1,0 +1,54 @@
+body {
+    font-family: sans-serif;
+    background-color: #e8f5e9;
+    color: #1b4332;
+    padding: 30px;
+}
+h2,
+h3 {
+    color: #2e7d2e;
+}
+form {
+    background-color: white;
+    padding: 20px;
+    border: 2px solid #2e7d32;
+    border-radius: 10px;
+    display: inline-block;
+    width: 320px;
+    box-shadow: 0 4px 12px rgba(46, 125, 50, 0.15);
+}
+input {
+    padding: 9px;
+    width: 90%;
+    margin-top: 5px;
+    border: 1px solid #66bb6a;
+    border-radius: 5px;
+}
+button {
+    padding: 9px 12px;
+    margin-top: 10px;
+    margin-right: 5px;
+    cursor: pointer;
+    border: 0;
+    border-radius: 5px;
+    background-color: #43a047;
+    color: white;
+}
+button:hover {
+    background-color: #2e7d32;
+}
+ul {
+    padding-left: 20px;
+}
+li {
+    margin-bottom: 5px;
+    color: #33691e;
+}
+#mensajeVenta {
+    font-weight: bold;
+    color: #2e7d32;
+}
+#totalCajaTexto {
+    color: #1b5e20;
+    font-weight: bold;
+}

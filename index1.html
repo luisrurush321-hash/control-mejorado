@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Acceso al Sistema - Bucle While</title>
+    <link rel="stylesheet" href="style1.css">
+</head>
+<body>
+    <h2>Módulo de Inicio de Sesión</h2>
+    <form id="loginForm" onsubmit="return false;">
+        <label for="claveInput">Ingrese su Contraseña Comercial:</label><br>
+        <input type="password" id="claveInput" placeholder="Clave de acceso"><br><br>
+        <button type="button" onclick="validarAcceso()">Ingresar</button>
+        <button type="button" onclick="siguienteIntento()">Intentar de nuevo</button>
+    </form>
+
+    <p id="mensajeLogin"></p>
+    <p id="intentosTexto">Intentos fallidos: 0 / 3</p>
+
+    <!--    Párrafos vacíos, que se actualizan dinámicamente desde JavaScript
+            para mostrar información al usuario (mensajes de éxito, error o estado del bloqueo).
+    -->
+
+    <script>
+        // Se define la clave correcta del sistema y el contador de intentos
+        const CLAVE_CORRECTA = "admin123";
+        let intentosFallidos = 0;
+        let bloqueado = false;
+
+
+
+        function validarAcceso() {
+            // Si la cuenta ya fue bloqueada por el bucle while, no permitimos más intentos
+            if (bloqueado) {
+                document.getElementById("mensajeLogin").innerText = "ACCESO BLOQUEADO: Debe contactar al administrador.";
+                return;
+            }
+
+            let claveIngresada = document.getElementById("claveInput").value; //captura del text de la clave
+
+            // Evaluamos la clave ingresada
+            if (claveIngresada === CLAVE_CORRECTA)
+            {
+                document.getElementById("mensajeLogin").innerText = "¡Bienvenido al sistema! Sesión iniciada correctamente.";
+                document.getElementById("claveInput").value = "";
+            }
+            else
+            {
+                intentosFallidos++; //incremento
+                document.getElementById("intentosTexto").innerText = "Intentos fallidos: " + intentosFallidos + " / 3";
+
+                // Bucle While: Verifica si el número de intentos fallidos alcanzó o superó el límite (3)
+                let contador = 0;
+                while (contador < intentosFallidos)
+                {
+                    if (intentosFallidos >= 3)
+                    {
+                        bloqueado = true;
+                    }
+                    contador++;
+                }
+
+                //aplicación del bloqueo en el DOM ()
+                if (bloqueado) {
+                    document.getElementById("mensajeLogin").innerText = "Superó el límite de 3 intentos. Su cuenta ha sido bloqueada.";
+                    //inner.Text ... lee o modifica el texto visible de un elemento HTML.
+                    
+                    document.getElementById("claveInput").disabled = true; // Deshabilitamos el campo
+                } else {
+                    document.getElementById("mensajeLogin").innerText = "Contraseña incorrecta. Intente de nuevo.";
+                }
+
+            }
+
+        }
+        function siguienteIntento() {
+            document.getElementById("claveInput").value = "";
+            document.getElementById("claveInput").focus();
+        }
+    </script>
+</body>
+</html>

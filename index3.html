@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Cierre de Caja - Bucle While</title>
+    <link rel="stylesheet" href="style3.css">
+</head>
+<body>
+    <h2>Módulo de Caja Diaria</h2>
+    <form onsubmit="return false;">
+        <label for="tcInput">Tipo de Cambio (S/ por $1.00):</label><br>
+        <input type="number" id="tcInput" placeholder="Ej. 3.75" step="0.01" value="3.75"><br><br>
+        <label for="montoInput">Monto de la Venta (S/):</label><br>
+        <input type="number" id="montoInput" placeholder="Ej. 50.50" step="0.01"><br><br>
+
+        <button type="button" onclick="registrarVenta()">Registrar Venta</button>
+        <button type="button" onclick="calcularTotalCaja()">Calcular Total Acumulado</button>
+    </form>
+
+    <p id="mensajeVenta"></p>
+    <h3>Historial de Ventas del Turno:</h3>
+    <ul id="historialVentas"></ul>
+    <h3 id="totalCajaTexto">Total en Caja: S/ 0.00</h3>
+
+    <script>
+        let ventasRegistradas = [];
+
+        function registrarVenta() {
+            let monto = parseFloat(document.getElementById("montoInput").value);
+            let tipoCambio = parseFloat(document.getElementById("tcInput").value);
+
+            if (isNaN(monto) || monto <= 0) {
+                alert("Ingrese un monto válido mayor a 0.");
+                return;
+            }
+            if (isNaN(tipoCambio) || tipoCambio <= 0) {
+                alert("Ingrese un tipo de Cambio válido.")
+                return;
+            }
+
+            ventasRegistradas.push(monto);
+            document.getElementById("montoInput").value = "";
+
+            let ventaEnDolares = monto / tipoCambio;
+
+            document.getElementById("mensajeVenta").innerText = "Venta de S/ " + monto.toFixed(2) + " ($ " + ventaEnDolares.toFixed(2) + ") +  registrada.";
+
+            // Mostramos la lista de ventas registradas
+            let lista = document.getElementById("historialVentas");
+            let item = document.createElement("li");
+            item.innerText = "Venta: S/ " + monto.toFixed(2) + " -> Equivalente: $ " + ventaEnDolares.toFixed(2);
+            lista.appendChild(item);
+        }
+
+        function calcularTotalCaja() {
+            let total = 0;
+            let i = 0;
+            let tipoCambio = parseFloat(document.getElementById("tcInput").value);
+
+            // Bucle While para sumar todos los montos contenidos en la lista de ventas
+            while (i < ventasRegistradas.length) {
+                total += ventasRegistradas[i];
+                i++; // Avanzamos al siguiente elemento
+            }
+            let totalDolares = total / tipoCambio;
+
+            document.getElementById("totalCajaTexto").innerText = "Total acumulado en caja: S/ " + total.toFixed(2) + " (Equivalente: $ " + totalDolares.toFixed(2) + ")";
+        }
+    </script>
+
+</body>
+</html>
